@@ -34,7 +34,7 @@ use function GuzzleHttp\json_decode as guzzle_json_decode;
  */
 final class AuthorizationMiddleware
 {
-    private const LS_ENDPOINT_ACCESS_TOKEN = 'https://cloud.merchantos.com/oauth/access_token.php';
+    private const LS_ENDPOINT_ACCESS_TOKEN = 'https://cloud.lightspeedapp.com/oauth/access_token.php';
 
     /**
      * @var callable

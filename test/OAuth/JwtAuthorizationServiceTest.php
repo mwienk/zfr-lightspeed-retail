@@ -80,7 +80,7 @@ final class AuthorizationServiceTest extends TestCase
         $authorizationUrl = $this->authorizationService->buildAuthorizationUrl($referenceId, $requestedScope);
 
         $this->assertSame('https', $authorizationUrl->getScheme());
-        $this->assertSame('cloud.merchantos.com', $authorizationUrl->getHost());
+        $this->assertSame('cloud.lightspeedapp.com', $authorizationUrl->getHost());
         $this->assertSame('/oauth/authorize.php', $authorizationUrl->getPath());
         $this->assertSame('/oauth/authorize.php', $authorizationUrl->getPath());
 
@@ -111,7 +111,7 @@ final class AuthorizationServiceTest extends TestCase
         $state             = parse_query($authorizationUrl->getQuery(), false)['state'];
 
         // Exchanges code for tokens
-        $this->httpClient->request('POST', 'https://cloud.merchantos.com/oauth/access_token.php', [
+        $this->httpClient->request('POST', 'https://cloud.lightspeedapp.com/oauth/access_token.php', [
             'json' => [
                 'client_id'     => '123',
                 'client_secret' => 'abc123',
@@ -127,7 +127,7 @@ final class AuthorizationServiceTest extends TestCase
         );
 
         // Fetches account ID
-        $this->httpClient->request('GET', 'https://api.merchantos.com/API/Account.json', [
+        $this->httpClient->request('GET', 'https://api.lightspeedapp.com/API/Account.json', [
             'headers' => ['Authorization' => 'Bearer foo'],
         ])->shouldBeCalled()->willReturn(
             new Response(200, [], stream_for(guzzle_json_encode([
@@ -169,7 +169,7 @@ final class AuthorizationServiceTest extends TestCase
         $validState        = parse_query($authUrl->getQuery(), false)['state'];
         $authorizationCode = '123456';
 
-        $this->httpClient->request('POST', 'https://cloud.merchantos.com/oauth/access_token.php', [
+        $this->httpClient->request('POST', 'https://cloud.lightspeedapp.com/oauth/access_token.php', [
             'json' => [
                 'client_id'     => '123',
                 'client_secret' => 'abc123',
@@ -177,7 +177,7 @@ final class AuthorizationServiceTest extends TestCase
                 'grant_type'    => 'authorization_code',
             ],
         ])->shouldBeCalled()->willThrow(
-            new ClientException('Boom!', new Request('GET', 'https://cloud.merchantos.com/oauth/access_token.php'))
+            new ClientException('Boom!', new Request('GET', 'https://cloud.lightspeedapp.com/oauth/access_token.php'))
         );
 
         $this->expectException(UnauthorizedException::class);
@@ -197,7 +197,7 @@ final class AuthorizationServiceTest extends TestCase
         $authorizationCode = '123456';
 
         // Exchanges code for tokens
-        $this->httpClient->request('POST', 'https://cloud.merchantos.com/oauth/access_token.php', [
+        $this->httpClient->request('POST', 'https://cloud.lightspeedapp.com/oauth/access_token.php', [
             'json' => [
                 'client_id'     => '123',
                 'client_secret' => 'abc123',
