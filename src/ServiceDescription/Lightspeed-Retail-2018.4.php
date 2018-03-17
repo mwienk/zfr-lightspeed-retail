@@ -24,9 +24,26 @@ return [
 
         /**
          * --------------------------------------------------------------------------------
+         * ACCOUNT RELATED METHODS
+         *
+         * DOC: http://developers.lightspeedhq.com/retail/endpoints/Account/
+         * --------------------------------------------------------------------------------
+         */
+
+        'GetAccount' => [
+            'httpMethod'    => 'GET',
+            'uri'           => 'Account.json',
+            'responseModel' => 'GenericModel',
+            'data'          => [
+                'root_key'      => 'Account',
+            ],
+        ],
+
+        /**
+         * --------------------------------------------------------------------------------
          * CUSTOMER RELATED METHODS
          *
-         * DOC: http://developers.lightspeedhq.com/retail/endpoints/Account-Customer/
+         * DOC: http://developers.lightspeedhq.com/retail/endpoints/Customer/
          * --------------------------------------------------------------------------------
          */
 

@@ -39,6 +39,10 @@ use ZfrLightspeedRetail\OAuth\CredentialStorage\CredentialStorageInterface;
  * @author Daniel Gimenes
  * @author Michaël Gallego
  *
+ * ACCOUNT RELATED METHODS:
+ *
+ * @method ResultInterface getAccount()
+ *
  * CUSTOMER RELATED METHODS:
  *
  * @method ResultInterface getCustomers(array $args = [])
@@ -105,7 +109,7 @@ class LightspeedRetailClient
         $handlerStack->push(Middleware::retry(new RetryStrategy($config['max_retries'] ?? 10)));
 
         $httpClient   = new Client(['handler' => $handlerStack]);
-        $description  = new Description(require __DIR__ . '/ServiceDescription/Lightspeed-Retail-2016.25.php');
+        $description  = new Description(require __DIR__ . '/ServiceDescription/Lightspeed-Retail-2018.4.php');
         $deserializer = new Deserializer(new GuzzleDeserializer($description, true), $description);
         $clientConfig = [];
 
